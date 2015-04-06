@@ -1,0 +1,83 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>'Allo, 'Allo!</h1>
+    <!-- <p class="lead">Kick-start your next web app with Angular Fullstack</p>
+    <img src="assets/images/yeoman.png" alt="I'm Yeoman"> -->
+     <div id="spark-login" />
+
+    <script src="http://cdn.jsdelivr.net/sparkjs/0.4.2/spark.min.js"></script>
+    <script>
+      sparkLogin(function(data) {
+        console.log(data);
+      });
+    </script>
+  </div>
+</header>
+
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Features:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div> -->
+
+  <!-- <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Access Token</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <th>Name</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th>2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th>3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+  </table> -->
+
+  <ul class="container">
+    <li><strong>Name:</strong> {{currentUser.name}}</li>
+    <li><strong>Email:</strong> {{currentUser.email}}</li>
+    <li><strong>Role:</strong> {{currentUser.role}}</li>
+    <li><strong>Access Token:</strong>  {{currentUser.spark_credentials.access_token}}</li>
+  </ul>
+
+  <div class="container">
+    <div class='btn btn-primary' ng-click="turnButtonOn('d','7','HIGH')">Turn D7 On</div>
+    <div class='btn btn-danger' ng-click="turnButtonOn('d','7', 'LOW')">Turn D7 Off</div>
+    <div class='btn btn-primary' ng-click="turnButtonOn('d','0', 'HIGH')">Turn D0 On</div>
+    <div class='btn btn-danger' ng-click="turnButtonOn('d','0', 'LOW')">Turn D0 Off</div>
+    <div class="btn btn-primary" ng-click="listDevices()">List Devices</div>
+    <div>{{devices}}</div>
+  </div>
+
+<footer class="footer">
+  <div class="container">
+      <p>Angular Fullstack v2.0.13 |
+        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>
