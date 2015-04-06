@@ -28,9 +28,10 @@ exports.create = function(req, res) {
   //   return res.json(201, led);
   // });
   console.log(req.body, req.body.request)
-  var api = req.body.request.api+'?'+req.body.request.buttonType+req.body.buttonNumber+req.body.request.status
-  request(api,function(data){
-    console.log(data)
+  var api = req.body.request.api+'&params=l'+req.body.request.buttonNumber+","+req.body.request.status
+  console.log(api)
+  request(api,function(error, response, body){
+    console.log(error, "body: ",JSON.parse(response.body), body)
   })
 };
 

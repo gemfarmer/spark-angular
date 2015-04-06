@@ -36,14 +36,10 @@ angular.module('sparkAngularApp')
 
     $scope.turnButtonOn = function (buttonType, buttonNumber,status) {
       User.get('/me',function(data){
-        console.log('User',data, data.spark_credentials)
-        var api = 'https://api.spark.io/v1/devices/53ff72065075535134221787/led?access_token=09a474aa55942fb33bd32c7f0cf471be9c9a2d22';
+        console.log('User',data, data.spark_credentials, data.spark_credentials.access_token )
+        var api = 'https://api.spark.io/v1/devices/53ff72065075535134221787/led?access_token='+data.spark_credentials.access_token;
           console.log(api)
-        var params = {
-          access_token:data.spark_credentials.access_token, 
-          params: buttonType+buttonNumber+','+status
-        }
-        params.access_token = '09a474aa55942fb33bd32c7f0cf471be9c9a2d22'
+      
         // console.log(params)
         // $http.post(api, function (response) {
         //   console.log('status:',response)

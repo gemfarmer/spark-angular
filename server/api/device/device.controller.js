@@ -25,13 +25,19 @@ exports.index = function(req, res) {
     console.log('- functions: ' + device.functions);
     console.log('- version: ' + device.version);
     console.log('- requires upgrade?: ' + device.requiresUpgrade);
-    res.json(200,device)
 
 
-    // Device.create(req.body, function(err, device) {
-    //   if(err) { return handleError(res, err); }
-    //   return res.json(201, device);
-    // });
+    Device.create(device, function(err, newDevice) {
+      if(err) { 
+        res.json(200,device);
+        return handleError(res, err); 
+      }
+      res.json(200,newDevice)
+    });
+    
+
+
+    
   });
 
   // spark.claimCore('53ff72065075535134221787', function(err, data) {
