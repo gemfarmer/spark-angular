@@ -5,4 +5,21 @@ This is the devices view.
 </div>
 <div class="btn btn-primary" ng-click="listDevices()">List Devices</div>
 
-<div>{{devices}}</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Device Name</th>
+        <th>Device ID</th>
+        <th>Connected</th>
+        <th>Last Used</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <th>{{devices.name}}</th>
+          <td>{{devices.id}}</td>
+          <td>{{devices.connected}}</td>
+          <td>{{devices.lastHeard}}</td>
+        </tr>
+      </tbody>
+  </table>

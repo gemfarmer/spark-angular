@@ -4,8 +4,20 @@ angular.module('sparkAngularApp')
   .controller('MainCtrl', function ($scope, $http, User, $cookieStore) {
     $scope.currentUser = {};
     if($cookieStore.get('token')) {
-      $scope.currentUser = User.get();
+      User.get(function(user){
+        console.log(user)
+        $scope.currentUser = user;
+        console.log(user.spark_credentials.access_token)
+      },function(err){
+        console.log(err);
+      });
+  
+      
+      
+    } else {
+      console.log('no token')
     }
+
     $scope.devices;
     // $scope.awesomeThings = [];
 

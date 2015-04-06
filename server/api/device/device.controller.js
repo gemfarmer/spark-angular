@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Device = require('./device.model');
 var spark = require('spark');
+var User = require('./../user/user.model');
 // var request = require('request');
 
 // Get list of devices
@@ -11,8 +12,8 @@ exports.index = function(req, res) {
   //   if(err) { return handleError(res, err); }
   //   return res.json(200, devices);
   // });
-  console.log('devices',spark.devices)
-
+  // console.log('devices',spark.devices)
+  // console.log(User.spark_credentials)
   spark.listDevices(function(err, devices) {
     console.log('devices',devices);
     console.log('attributes',devices[0].attributes)
@@ -25,6 +26,12 @@ exports.index = function(req, res) {
     console.log('- version: ' + device.version);
     console.log('- requires upgrade?: ' + device.requiresUpgrade);
     res.json(200,device)
+
+
+    // Device.create(req.body, function(err, device) {
+    //   if(err) { return handleError(res, err); }
+    //   return res.json(201, device);
+    // });
   });
 
   // spark.claimCore('53ff72065075535134221787', function(err, data) {

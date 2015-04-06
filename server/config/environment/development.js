@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/sparkangular-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };
