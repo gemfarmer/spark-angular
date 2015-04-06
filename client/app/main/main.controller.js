@@ -5,15 +5,11 @@ angular.module('sparkAngularApp')
     $scope.currentUser = {};
     if($cookieStore.get('token')) {
       User.get(function(user){
-        console.log(user)
         $scope.currentUser = user;
-        console.log(user.spark_credentials.access_token)
       },function(err){
         console.log(err);
       });
   
-      
-      
     } else {
       console.log('no token')
     }
