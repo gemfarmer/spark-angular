@@ -1,26 +1,31 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+<h3><center>Account Details</center></h3>
+<ul class="container">
+	<li><strong>Name:</strong> {{currentUser.name}}</li>
+	<li><strong>Email:</strong> {{currentUser.email}}</li>
+	<li><strong>Role:</strong> {{currentUser.role}}</li>
+	<li><strong>Access Token:</strong>  {{currentUser.spark_credentials.access_token}}</li>
+	<li><strong>Devices: </strong>  
 
-<div class="col-md-12">
-This is the devices view.
-</div>
-<div class="btn btn-primary" ng-click="listDevices()">List Devices</div>
+		<table class="table table-striped">
+		    <thead>
+		      <tr>
+		        <th>Device Name</th>
+		        <th>Device ID</th>
+		        <th>Connected</th>
+		        <th>Last Updated</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		        <tbody ng-repeat="device in currentUser.devices">
+		          <th>{{device.name}}</th>
+		          <td>{{device.id}}</td>
+		          <td>{{device.connected | yesNo}}</td>
+		          <td>{{device.lastHeard | amCalendar}}</td>
+		        </tr>
+		      </tbody>
+		  </table>
+	</li>
+</ul>
 
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Device Name</th>
-        <th>Device ID</th>
-        <th>Connected</th>
-        <th>Last Used</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <th>{{devices.name}}</th>
-          <td>{{devices.id}}</td>
-          <td>{{devices.connected}}</td>
-          <td>{{devices.lastHeard}}</td>
-        </tr>
-      </tbody>
-  </table>
-  {{devices}}
+

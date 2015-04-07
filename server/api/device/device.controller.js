@@ -17,24 +17,24 @@ exports.index = function(req, res) {
   spark.listDevices(function(err, devices) {
     console.log('devices',devices);
     console.log('attributes',devices[0].attributes)
-    var device = devices[0].attributes;
+    if (devices){
+      var device = devices[0].attributes;
 
-    console.log('Device name: ' + device.name);
-    console.log('- connected?: ' + device.connected);
-    console.log('- variables: ' + device.variables);
-    console.log('- functions: ' + device.functions);
-    console.log('- version: ' + device.version);
-    console.log('- requires upgrade?: ' + device.requiresUpgrade);
+      console.log('Device name: ' + device.name);
+      console.log('- connected?: ' + device.connected);
+      console.log('- variables: ' + device.variables);
+      console.log('- functions: ' + device.functions);
+      console.log('- version: ' + device.version);
+      console.log('- requires upgrade?: ' + device.requiresUpgrade);
 
-
-    Device.create(device, function(err, newDevice) {
-      if(err) { 
-        res.json(200,device);
-        return handleError(res, err); 
-      }
-      res.json(200,newDevice)
-    });
-    
+      Device.create(device, function(err, newDevice) {
+        if(err) { 
+          res.json(200,device);
+          return handleError(res, err); 
+        }
+        res.json(200,newDevice)
+      });
+    } else { res.send(403) }
 
 
     
@@ -77,9 +77,26 @@ exports.show = function(req, res) {
 
 // Creates a new device in the DB.
 exports.create = function(req, res) {
-  Device.create(req.body, function(err, device) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, device);
+  console.log('req.body:',req.body)
+  spark.listDevices(function(err, devices) {
+    console.log('devices',devices);
+    console.log('attributes',devices[0].attributes)
+    var device = devices[0].attributes;
+
+    console.log('Device name: ' + device.name);
+    console.log('- connected?: ' + device.connected);
+    console.log('- variables: ' + device.variables);
+    console.log('- functions: ' + device.functions);
+    console.log('- version: ' + device.version);
+    console.log('- requires upgrade?: ' + device.requiresUpgrade);
+
+    Device.create(device, function(err, newDevice) {
+      if(err) { 
+        res.json(200,device);
+        return handleError(res, err); 
+      }
+      res.json(200,newDevice)
+    });
   });
 };
 

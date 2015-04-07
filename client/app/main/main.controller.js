@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('sparkAngularApp')
-  .controller('MainCtrl', function ($scope, $http, User, $cookieStore) {
-    $scope.currentUser = {};
+  .controller('MainCtrl', function ($scope, $http, User, $cookieStore, $rootScope, ipCookie) {
+    $rootScope.currentUser = {};
     if($cookieStore.get('token')) {
       User.get(function(user){
-        $scope.currentUser = user;
+        $rootScope.currentUser = user;
+        ipCookie('user', user);
       },function(err){
         console.log(err);
       });
@@ -14,7 +15,7 @@ angular.module('sparkAngularApp')
       console.log('no token')
     }
 
-    $scope.devices;
+
     // $scope.awesomeThings = [];
 
     // $http.get('/api/things').success(function(awesomeThings) {
@@ -58,21 +59,6 @@ angular.module('sparkAngularApp')
         console.log(info)
         $http.post('api/leds',info)
       });
-    }
-
-    $scope.listDevices = function(){
-   
-      $http.get('/api/devices').
-      success(function(devices, status, headers, config) {
-        console.log(devices)
-        $scope.devices = devices;
-      }).
-      error(function(data, status, headers, config) {
-        console.log('err: ',data)
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-      });
-      
     }
 
   });

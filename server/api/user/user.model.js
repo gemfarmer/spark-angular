@@ -14,7 +14,17 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  spark_credentials: Object
+  spark_credentials: Object,
+  devices: [
+    {
+      id: String,
+      name: String,
+      lastApp: Boolean,
+      lastHeard: Date,
+      connected: Boolean
+    }
+  ]
+
 });
 
 /**

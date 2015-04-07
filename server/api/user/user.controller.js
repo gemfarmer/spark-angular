@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('lodash');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -89,6 +90,23 @@ exports.changePassword = function(req, res, next) {
     } else {
       res.send(403);
     }
+  });
+};
+
+// Updates an existing thing in the DB.
+exports.update = function(req, res) {
+  console.log('req.body:',req.body)
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function (err, thing) {
+    console.log('thing:', thing)
+    if (err) { return handleError(res, err); }
+    if(!thing) { return res.send(404); }
+    var updated = _.merge(thing, req.body);
+    console.log(updated)
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, thing);
+    });
   });
 };
 
