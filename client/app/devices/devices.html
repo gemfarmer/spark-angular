@@ -1,27 +1,37 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <h3><center>Account Details</center></h3>
+
+<div class="btn btn-primary" ng-click="listDevices()">Refresh</div><div ng-show="refreshError">{{refreshError}}</div>
+
 <ul class="container">
 	<li><strong>Name:</strong> {{currentUser.name}}</li>
 	<li><strong>Email:</strong> {{currentUser.email}}</li>
 	<li><strong>Role:</strong> {{currentUser.role}}</li>
 	<li><strong>Access Token:</strong>  {{currentUser.spark_credentials.access_token}}</li>
-	<li><strong>Devices: </strong>  
+	<li><strong>Devices: </strong>
 
 		<table class="table table-striped">
 		    <thead>
 		      <tr>
 		        <th>Device Name</th>
 		        <th>Device ID</th>
+		        <th>Functions</th>
 		        <th>Connected</th>
 		        <th>Last Updated</th>
+		        <!-- <th>Raw JSON</th> -->
 		      </tr>
 		    </thead>
 		    <tbody>
 		        <tbody ng-repeat="device in currentUser.devices">
 		          <th>{{device.name}}</th>
 		          <td>{{device.id}}</td>
+		          <td>
+		          	<li ng-repeat='function in device.functions'><a>{{function}}</a></li>
+		          </td>
 		          <td>{{device.connected | yesNo}}</td>
 		          <td>{{device.lastHeard | amCalendar}}</td>
+		          <!-- <td>{{device}}</td> -->
+
 		        </tr>
 		      </tbody>
 		  </table>

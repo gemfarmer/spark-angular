@@ -21,9 +21,15 @@ var UserSchema = new Schema({
       name: String,
       lastApp: Boolean,
       lastHeard: Date,
-      connected: Boolean
+      connected: Boolean,
+      variables: Object,
+      functions: [ String ],
+      cc3000PatchVersion: String,
+      cc3000_patch_version: String,
+      last_heard: Date
     }
-  ]
+  ],
+  test: String
 
 });
 

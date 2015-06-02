@@ -95,14 +95,18 @@ exports.changePassword = function(req, res, next) {
 
 // Updates an existing thing in the DB.
 exports.update = function(req, res) {
-  console.log('req.body:',req.body)
-  if(req.body._id) { delete req.body._id; }
-  User.findById(req.params.id, function (err, thing) {
-    console.log('thing:', thing)
+  // console.log('req.body:',req.body.devices)
+  var userId = req.user._id;
+  if(req.user._id) { delete req.user._id; }
+  User.findById(userId, function (err, thing) {
+    // console.log('thing:', thing)
+    console.log(err)
     if (err) { return handleError(res, err); }
     if(!thing) { return res.send(404); }
     var updated = _.merge(thing, req.body);
-    console.log(updated)
+    console.log('updat', req.body)
+    console.log('updat', thing)
+    console.log('updat', updated)
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, thing);
@@ -130,3 +134,7 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+function handleError(res, err) {
+  return res.send(500, err);
+}

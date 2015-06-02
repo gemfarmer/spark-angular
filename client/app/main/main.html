@@ -5,13 +5,18 @@
     <h1>'Allo, 'Allo!</h1>
     <!-- <p class="lead">Kick-start your next web app with Angular Fullstack</p>
     <img src="assets/images/yeoman.png" alt="I'm Yeoman"> -->
-     <div id="spark-login" />
+     <!-- <div id="spark-login" /> -->
 
-    <script src="http://cdn.jsdelivr.net/sparkjs/0.4.2/spark.min.js"></script>
+     <!-- <div spark-login></div> -->
+     <!-- <div spark-device-list></div> -->
+
     <script>
-      sparkLogin(function(data) {
-        console.log(data);
-      });
+      //jquery log in
+      // sparkLogin(function(data) {
+      //   console.log(data);
+      // });
+
+
     </script>
   </div>
 </header>
@@ -58,7 +63,7 @@
       </tbody>
   </table> -->
 
-
+  <div ng-click='login()' class="btn">login</div>
   <div class="container">
     <div class='btn btn-primary' ng-click="turnButtonOn('d','7','HIGH')">Turn D7 On</div>
     <div class='btn btn-danger' ng-click="turnButtonOn('d','7', 'LOW')">Turn D7 Off</div>

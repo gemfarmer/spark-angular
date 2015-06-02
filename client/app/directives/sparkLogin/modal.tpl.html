@@ -1,0 +1,28 @@
+<form id="spark-login-form" 
+      class="spark-login-modal spark-modal current form" 
+      style="position: fixed; top: 50%; left: 50%;  margin-left: -200px; z-index: 2; display: block;"
+      ng-submit="submit(form)"
+      name="form" >
+    <div id="spark-login-form-error" class="spark-login-error"></div>
+    <input id="spark-login-form-email" type="text" class="spark-login-input" placeholder="email" ng-model="user.email">
+    <input id="spark-login-form-password" type="password" name="password" class="spark-login-input" placeholder="password" ng-model="user.password">
+
+    <div class="form-group has-error">
+    	<p class="help-block" ng-show="form.email.$error.required && form.password.$error.required && submitted">
+     		Please enter your username and password.
+  		</p>
+  	</div>
+    <button id="spark-login-form-button" class="spark-login-button" type="submit">
+       log in
+    </button>
+    <a ng-click="$dismiss()" rel="modal:close" class="close-modal ">Close</a>
+
+    <div class="form-group has-error">
+    	<p class="help-block" ng-show="matchError">
+     		Oops! It looks like you entered an invalid username or password.
+  		</p>
+  	</div>
+
+
+
+</form>

@@ -6,6 +6,8 @@ var spark = require('spark');
 var User = require('./../user/user.model');
 // var request = require('request');
 
+
+
 // Get list of devices
 exports.index = function(req, res) {
   // Device.find(function (err, devices) {
@@ -15,36 +17,55 @@ exports.index = function(req, res) {
   // console.log('devices',spark.devices)
   // console.log(User.spark_credentials)
   spark.listDevices(function(err, devices) {
-    console.log('devices',devices);
-    console.log('attributes',devices[0].attributes)
+    // console.log('devices',devices);
+    // console.log('attributes',devices[0].attributes)
+
+
+    console.log('devices----------------------------')
+
+
+
+
     if (devices){
+
+      
       var device = devices[0].attributes;
 
-      console.log('Device name: ' + device.name);
-      console.log('- connected?: ' + device.connected);
-      console.log('- variables: ' + device.variables);
-      console.log('- functions: ' + device.functions);
-      console.log('- version: ' + device.version);
-      console.log('- requires upgrade?: ' + device.requiresUpgrade);
+      var deviceCore = devices[0];
+    
+      deviceCore.getAttributes(function(err, data) {
+        if (err) {
+          
+          console.log('An error occurred while getting device attrs:', err);
+        } else {
+          console.log('Device attrs retrieved successfully:', data);
 
-      Device.create(device, function(err, newDevice) {
-        if(err) { 
+          device = _.merge(device, data)
+          console.log('new device',device)
+
           res.json(200,device);
-          return handleError(res, err); 
+          // Device.create(device, function(err, newDevice) {
+          //   if(err) { 
+          //     res.json(200,device);
+          //     return handleError(res, err); 
+          //   }
+          //   res.json(200,newDevice)
+          // });
         }
-        res.json(200,newDevice)
       });
-    } else { res.send(403) }
+
+      
+    } else { 
+      console.log('else')
+      res.send(403) 
+
+    }
 
 
     
   });
 
-  // spark.claimCore('53ff72065075535134221787', function(err, data) {
-  //   console.log('spark.claimCore err:', err);
-  //   console.log('spark.claimCore data:', data);
-  //   res.json(200,data);
-  // });
+  
 
   // console.log('spark', spark.listDevices())
   // var devicesPr = spark.listDevices();
